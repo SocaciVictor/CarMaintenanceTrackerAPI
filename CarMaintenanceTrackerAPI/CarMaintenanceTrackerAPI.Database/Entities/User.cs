@@ -31,6 +31,10 @@ namespace CarMaintenanceTracker.Database.Entities
         [StringLength(50)]
         public string? LastName { get; set; }
 
+        [Required]
+        [Range(0, 1, ErrorMessage = "Type must be either 0 (Administrator) or 1 (Simple user).")]
+        public int Type { get; set; }
+
         public Car? Car { get; set; } // Relație one-to-one
     }
 }

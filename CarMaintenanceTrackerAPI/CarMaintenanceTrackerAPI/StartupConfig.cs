@@ -1,4 +1,6 @@
 ﻿using CarMaintenanceTracker.Database.Context;
+using CarMaintenanceTrackerAPI.Core.Services;
+using CarMaintenanceTrackerAPI.Database.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -8,19 +10,25 @@ namespace CarMaintenanceTracker
     {
         public static void AddServices(this IServiceCollection services)
         {
+            services.AddScoped<CarsServices>();
+            services.AddScoped<UsersServices>();
+
         }
 
         public static void AddRepositories(this IServiceCollection services)
         {
             services.AddDbContext<CarMaintenanceTrackerDbContext>();
             services.AddScoped<DbContext, CarMaintenanceTrackerDbContext>();
+
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         public static void AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Lab project API", Version = "v1" });
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Car Maintenance Tracker", Version = "v1" });
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = @"JWT Authorization header using the Bearer scheme.",
