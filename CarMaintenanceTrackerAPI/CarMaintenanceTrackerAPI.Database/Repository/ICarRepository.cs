@@ -10,5 +10,7 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
     public interface ICarRepository
     {
         List<Car> GetAllCars();
+
+        void AddCar(Car car);
     }
 }

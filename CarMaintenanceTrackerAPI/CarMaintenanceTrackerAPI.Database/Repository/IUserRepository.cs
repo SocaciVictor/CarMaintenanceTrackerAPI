@@ -10,5 +10,8 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
     public interface IUserRepository
     {
         List<User> GetAllUsers();
+
+        User GetByEmail(string email);
+        void Add(User user);
     }
 }

@@ -12,6 +12,9 @@ namespace CarMaintenanceTracker
         {
             services.AddScoped<CarsServices>();
             services.AddScoped<UsersServices>();
+            //services.AddScoped<AuthServices>();
+            //services.AddScoped<ServicesCentersServices>();
+            //services.AddScoped<MaintenancesRecordsServices>();
 
         }
 
@@ -22,6 +25,10 @@ namespace CarMaintenanceTracker
 
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            //services.AddScoped<IServiceCenterRespository, ServiceCenterRepository>();
+            //services.AddScoped<IMaintenanceRecordRepository, MaintenanceRecordRepository>();
+            //services.AddScoped<ICarServiceCenter, CarServiceCenterRepository>();
+
         }
 
         public static void AddSwagger(this IServiceCollection services)

@@ -14,8 +14,4 @@
     <ProjectReference Include="..\CarMaintenanceTrackerAPI.Database\CarMaintenanceTrackerAPI.Database.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\Request\" />
-  </ItemGroup>
-
 </Project>

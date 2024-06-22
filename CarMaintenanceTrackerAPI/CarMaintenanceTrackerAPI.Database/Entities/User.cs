@@ -17,6 +17,10 @@ namespace CarMaintenanceTracker.Database.Entities
 
         [Required]
         [StringLength(256)]
+        public string? Password { get; set; }
+
+        [Required]
+        [StringLength(256)]
         public string? PasswordSalt { get; set; }
 
         [Required]

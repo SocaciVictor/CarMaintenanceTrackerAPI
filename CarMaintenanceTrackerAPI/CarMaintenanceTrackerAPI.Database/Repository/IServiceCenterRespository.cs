@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace CarMaintenanceTrackerAPI.Database.Repository
 {
-    public interface ICarServiceCenter
+    public interface IServiceCenterRespository
     {
+        List<ServiceCenter> GetAllServiceCenters();
 
-        List<CarServiceCenter> GetAllCarServiceCenters();
-        void AddCarServiceCenter(CarServiceCenter carServiceCenter);
+        void AddServiceCenter(ServiceCenter serviceCenter);
     }
 }
