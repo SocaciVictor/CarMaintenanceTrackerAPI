@@ -16,26 +16,22 @@ namespace CarMaintenanceTracker.Database.Entities
 
         [Required]
         [StringLength(50)]
-        public string Make { get; set; }
+        public string? Make { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Model { get; set; }
+        public string? Model { get; set; }
 
         [Required]
         public int Year { get; set; }
 
         [Required]
-        [StringLength(17)]
-        public string VIN { get; set; }
-
-        [Required]
         [StringLength(10)]
-        public string LicensePlate { get; set; }
+        public string? LicensePlate { get; set; }
 
-        public User User { get; set; }
-        public List<MaintenanceRecord> MaintenanceRecords { get; set; }
+        public User? User { get; set; }
+        public List<MaintenanceRecord>? MaintenanceRecords { get; set; }
 
-        public List<CarServiceCenter> CarServiceCenters { get; set; } // Relație many-to-many
+        public List<CarServiceCenter>? CarServiceCenters { get; set; } // Relație many-to-many
     }
 }

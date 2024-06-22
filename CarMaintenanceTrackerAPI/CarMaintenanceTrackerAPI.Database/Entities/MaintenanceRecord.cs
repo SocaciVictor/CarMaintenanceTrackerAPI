@@ -25,15 +25,15 @@ namespace CarMaintenanceTracker.Database.Entities
         public DateTime Date { get; set; }
 
         [Required]
-        public decimal Cost { get; set; }
+        public double Cost { get; set; }
 
         [StringLength(500)]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         // Relația cu Car (one-to-many)
-        public Car Car { get; set; }
+        public Car? Car { get; set; }
 
         // Relația cu ServiceCenter (many-to-one)
-        public ServiceCenter ServiceCenter { get; set; }
+        public ServiceCenter? ServiceCenter { get; set; }
     }
 }
