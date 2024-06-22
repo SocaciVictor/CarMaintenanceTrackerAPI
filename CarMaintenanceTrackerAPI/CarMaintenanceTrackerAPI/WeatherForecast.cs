@@ -1,4 +1,4 @@
-namespace CarMaintenanceTrackerAPI
+namespace CarMaintenanceTracker
 {
     public class WeatherForecast
     {

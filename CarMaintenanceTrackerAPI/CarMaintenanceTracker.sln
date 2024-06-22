@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarMaintenanceTrackerAPI", "CarMaintenanceTrackerAPI\CarMaintenanceTrackerAPI.csproj", "{CF54FFE7-BC36-449A-B086-E9677743C21B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarMaintenanceTrackerAPI.Core", "CarMaintenanceTrackerAPI.Core\CarMaintenanceTrackerAPI.Core.csproj", "{E32FBF9E-4261-490E-84B5-E7FC1E2CAE0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarMaintenanceTrackerAPI.Database", "CarMaintenanceTrackerAPI.Database\CarMaintenanceTrackerAPI.Database.csproj", "{406F7F7C-A5D4-497F-97DE-62DDF6F410F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarMaintenanceTrackerAPI.Infrastructure", "CarMaintenanceTrackerAPI.Infrastructure\CarMaintenanceTrackerAPI.Infrastructure.csproj", "{19BD4FD4-8D88-4B0D-8E84-CE41927AC8B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF54FFE7-BC36-449A-B086-E9677743C21B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF54FFE7-BC36-449A-B086-E9677743C21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF54FFE7-BC36-449A-B086-E9677743C21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF54FFE7-BC36-449A-B086-E9677743C21B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E32FBF9E-4261-490E-84B5-E7FC1E2CAE0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E32FBF9E-4261-490E-84B5-E7FC1E2CAE0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E32FBF9E-4261-490E-84B5-E7FC1E2CAE0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E32FBF9E-4261-490E-84B5-E7FC1E2CAE0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{406F7F7C-A5D4-497F-97DE-62DDF6F410F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{406F7F7C-A5D4-497F-97DE-62DDF6F410F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{406F7F7C-A5D4-497F-97DE-62DDF6F410F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{406F7F7C-A5D4-497F-97DE-62DDF6F410F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19BD4FD4-8D88-4B0D-8E84-CE41927AC8B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19BD4FD4-8D88-4B0D-8E84-CE41927AC8B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19BD4FD4-8D88-4B0D-8E84-CE41927AC8B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19BD4FD4-8D88-4B0D-8E84-CE41927AC8B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D6A2C980-BB6E-49EE-865B-ED97D944B1BA}
+	EndGlobalSection
+EndGlobal
