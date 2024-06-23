@@ -1,4 +1,5 @@
 ﻿using CarMaintenanceTracker.Database.Entities;
+using CarMaintenanceTrackerAPI.Core.Dtos.Request;
 using CarMaintenanceTrackerAPI.Core.Dtos.Response;
 using CarMaintenanceTrackerAPI.Core.Mapping;
 using CarMaintenanceTrackerAPI.Database.Repository;
@@ -31,6 +32,11 @@ namespace CarMaintenanceTrackerAPI.Core.Services
             }
 
             return serviceCenterDtos;
+        }
+        public void AddServiceCenter(AddServiceCenterRequest request)
+        {
+            var result = request.ToEntity();
+            _servicesCenterRepository.AddServiceCenter(result);
         }
     }
 }
