@@ -1,5 +1,7 @@
 ﻿using CarMaintenanceTracker.Database.Entities;
 using CarMaintenanceTrackerAPI.Core.Dtos.Request;
+using CarMaintenanceTrackerAPI.Core.Dtos.Response;
+using CarMaintenanceTrackerAPI.Core.Mapping;
 using CarMaintenanceTrackerAPI.Database.Repository;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,20 @@ namespace CarMaintenanceTrackerAPI.Core.Services
             _userRepository = usersRepository;
             _authServices = authService;
 
+        }
+
+        public List<UserDto> GetUsersDto()
+        {
+            var users = _userRepository.GetAllUsers();
+
+            List<UserDto> userDtos = new List<UserDto>();
+
+            foreach (User user in users)
+            {
+                userDtos.Add(user.ToUserDto());
+            }
+
+            return userDtos;
         }
 
         public void Register(RegisterRequest registerData)

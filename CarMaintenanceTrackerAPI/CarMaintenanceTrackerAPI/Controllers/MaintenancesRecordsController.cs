@@ -17,6 +17,8 @@ namespace CarMaintenanceTrackerAPI.Controllers
         }
 
         [HttpGet]
+        [Route("GetMaintenancesRecords")]
+        [Authorize(Roles = "0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<List<MaintenanceRecordDto>> GetMaintenancesRecords()
         {

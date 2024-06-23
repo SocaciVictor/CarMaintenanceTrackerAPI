@@ -38,5 +38,16 @@ namespace CarMaintenanceTrackerAPI.Controllers
 
             return Ok(new { token = jwtToken });
         }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [Route("GetUsers")]
+        [Authorize(Roles = "0")]
+        public IActionResult GetUsers()
+        {
+            var response = _usersServices.GetUsersDto();
+
+            return Ok(response);
+        }
     }
 }

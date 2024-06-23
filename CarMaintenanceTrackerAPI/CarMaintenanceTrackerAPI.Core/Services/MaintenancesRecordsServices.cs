@@ -19,13 +19,15 @@ namespace CarMaintenanceTrackerAPI.Core.Services
         private readonly IMaintenanceRecordRepository _maintenanceRecordRepository;
         private readonly ICarRepository _carRepository;
         private readonly IServiceCenterRespository _serviceCenterRespository;
+        private readonly ICarServiceCenter _carServiceCenterRepository;
 
 
-       public MaintenancesRecordsServices(IMaintenanceRecordRepository maintenanceRecordRepository, ICarRepository carRepository, IServiceCenterRespository serviceCenterRespository)
+       public MaintenancesRecordsServices(IMaintenanceRecordRepository maintenanceRecordRepository, ICarRepository carRepository, IServiceCenterRespository serviceCenterRespository, ICarServiceCenter carServiceCenter)
         {
             _maintenanceRecordRepository = maintenanceRecordRepository;
             _carRepository = carRepository;
             _serviceCenterRespository = serviceCenterRespository;
+            _carServiceCenterRepository = carServiceCenter;
         }
 
         public List<MaintenanceRecordDto> GetMaintenanceDtos()
@@ -63,7 +65,10 @@ namespace CarMaintenanceTrackerAPI.Core.Services
             var result = request.ToEntity();
             if (ValidCarId(result.CarId) && ValidServiceId(result.ServiceCenterId))
             {
-           
+                var carServiceCenter = new CarServiceCenter();
+                carServiceCenter.CarId = result.CarId;
+                carServiceCenter.ServiceCenterId = result.ServiceCenterId;
+                _carServiceCenterRepository.AddCarServiceCenter(carServiceCenter);
                 _maintenanceRecordRepository.AddMaintenanceRecord(result);
             }
 
@@ -73,6 +78,14 @@ namespace CarMaintenanceTrackerAPI.Core.Services
             var result = _maintenanceRecordRepository.GetMaintenanceById(requestId);
             if(ValidCarId(request.CarId)&& ValidServiceId(request.ServiceCenterId))
             {
+                if (HasChangedCarId(request.CarId, result))
+                {
+                    _carServiceCenterRepository.EditCarId(request.CarId, result.CarId);
+                }
+                if(HasChangedServiceCenterId(request.ServiceCenterId, result))
+                {
+                    _carServiceCenterRepository.EditServiceId(request.ServiceCenterId, result.ServiceCenterId);
+                }
                 editTask(request, result);
                 _maintenanceRecordRepository.EditMaintenance(result);
 
@@ -92,7 +105,41 @@ namespace CarMaintenanceTrackerAPI.Core.Services
             _maintenanceRecordRepository.DeleteMaintenance(maintenance);
         }
 
+        private bool HasChangedCarId(int carId, MaintenanceRecord maintenanceRecord)
+        {
+            var car = _carRepository.GetCarById(carId);
 
+            if(car == null)
+            {
+                throw new ResourceMissingException("Car not found");
+            }
+
+            if (maintenanceRecord.CarId == carId)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool HasChangedServiceCenterId(int serviceCenterId, MaintenanceRecord maintenanceRecord)
+        {
+            var serviceCenter = _serviceCenterRespository.GetServiceCenterById(serviceCenterId);
+          
+
+            if (serviceCenter == null)
+            {
+                throw new ResourceMissingException("Service center not found");
+            }
+
+
+            if (maintenanceRecord.ServiceCenterId == serviceCenterId)
+            {
+                return false;
+            }
+
+            return true;
+        }
 
         private bool ValidCarId(int Id)
         {

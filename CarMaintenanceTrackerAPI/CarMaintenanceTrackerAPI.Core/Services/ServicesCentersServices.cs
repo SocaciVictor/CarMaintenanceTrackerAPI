@@ -33,6 +33,20 @@ namespace CarMaintenanceTrackerAPI.Core.Services
 
             return serviceCenterDtos;
         }
+
+        public List<ServiceCenterDto> GetServiceCenterDtosOfOwnner(int authUserId)
+        {
+            var serviceCenters = _servicesCenterRepository.GetAllServiceCenters();
+
+            List<ServiceCenterDto> serviceCenterDtos = new List<ServiceCenterDto>();
+
+            foreach (ServiceCenter serviceCenter in serviceCenters)
+            {
+                serviceCenterDtos.Add(serviceCenter.ToServiceCenterDto());
+            }
+
+            return serviceCenterDtos;
+        }
         public void AddServiceCenter(AddServiceCenterRequest request)
         {
             var result = request.ToEntity();

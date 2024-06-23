@@ -12,5 +12,7 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
 
         List<CarServiceCenter> GetAllCarServiceCenters();
         void AddCarServiceCenter(CarServiceCenter carServiceCenter);
+        void EditCarId(int carId, int oldCarId);
+        void EditServiceId(int serviceCenterId, int oldServiceCenterId);
     }
 }

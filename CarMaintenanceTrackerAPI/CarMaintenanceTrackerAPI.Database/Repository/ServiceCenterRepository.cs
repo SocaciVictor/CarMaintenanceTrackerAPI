@@ -35,5 +35,24 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
                 .Any(x=>x.Id == serviceId);
             return result;
         }
+
+        public List<ServiceCenter> GetAllServiceCentersOfOwner(int authUserId)
+        {
+            var result = _carMaintenanceTrackerDbContext.ServiceCenters?
+                .Include(sc => sc.CarServiceCenters)
+                .ThenInclude(sc => sc.Car)
+                .ThenInclude(sc => sc.User)
+                .Where(sc =>sc.Id == authUserId)
+                .ToList();
+            return result;
+        }
+
+        public ServiceCenter GetServiceCenterById(int serviceId)
+        {
+            var result = _carMaintenanceTrackerDbContext.ServiceCenters
+               .Where(x => x.Id == serviceId)
+               .FirstOrDefault();
+            return result;
+        }
     }
 }

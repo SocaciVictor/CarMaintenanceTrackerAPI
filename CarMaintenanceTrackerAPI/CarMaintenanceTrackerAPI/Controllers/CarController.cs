@@ -17,6 +17,8 @@ namespace CarMaintenanceTrackerAPI.Controllers
         }
 
         [HttpGet]
+        [Route("GetCars")]
+        [Authorize(Roles = "0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<List<CarDto>> GetCar()
         {

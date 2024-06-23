@@ -23,5 +23,21 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
             _carMaintenanceTrackerDbContext.CarServiceCenters.Add(carServiceCenter);
             _carMaintenanceTrackerDbContext.SaveChanges();
         }
+
+        public void EditCarId(int carId, int oldCarId)
+        {
+            var carServiceCenter = _carMaintenanceTrackerDbContext.CarServiceCenters
+                .FirstOrDefault(c => c.CarId == oldCarId);
+            carServiceCenter.CarId = carId;
+            _carMaintenanceTrackerDbContext.SaveChanges();
+        }
+
+        public void EditServiceId(int serviceCenterId, int oldServiceCenterId)
+        {
+            var carServiceCenter = _carMaintenanceTrackerDbContext.CarServiceCenters
+                .FirstOrDefault(c => c.ServiceCenterId == oldServiceCenterId);
+            carServiceCenter.ServiceCenterId = serviceCenterId;
+            _carMaintenanceTrackerDbContext.SaveChanges();
+        }
     }
 }
