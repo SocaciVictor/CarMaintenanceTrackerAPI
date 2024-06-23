@@ -1,4 +1,5 @@
 ﻿using CarMaintenanceTracker.Database.Entities;
+using CarMaintenanceTrackerAPI.Core.Dtos.Request;
 using CarMaintenanceTrackerAPI.Core.Dtos.Response;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,19 @@ namespace CarMaintenanceTrackerAPI.Core.Mapping
             result.Cost = maintenanceRecord.Cost;
             result.Description = maintenanceRecord.Description;
 
+            return result;
+        }
+        public static MaintenanceRecord ToEntity(this AddMaintenanceRecordRequest addMaintenance)
+        {
+            if (addMaintenance == null) return null;
+
+            var result = new MaintenanceRecord();
+
+            result.CarId = addMaintenance.CarId;
+            result.ServiceCenterId = addMaintenance.ServiceCenterId;
+            result.Cost=addMaintenance.Cost;
+            result.Description = addMaintenance.Description;
+            result.Date=addMaintenance.Date;
             return result;
         }
     }

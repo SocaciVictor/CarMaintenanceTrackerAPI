@@ -1,4 +1,5 @@
-﻿using CarMaintenanceTrackerAPI.Core.Dtos.Response;
+﻿using CarMaintenanceTrackerAPI.Core.Dtos.Request;
+using CarMaintenanceTrackerAPI.Core.Dtos.Response;
 using CarMaintenanceTrackerAPI.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,13 @@ namespace CarMaintenanceTrackerAPI.Controllers
             var response = _maintenancesRecordsServices.GetMaintenanceDtos();
 
             return response;
+        }
+        [HttpPost]
+        [Route("AddMaintenance")]
+        public IActionResult AddMaintenance(AddMaintenanceRecordRequest maintenanceRequest)
+        {
+            _maintenancesRecordsServices.AddMaintenanceRecord(maintenanceRequest);
+            return Ok("Maintenance added succesfully");
         }
     }
 }

@@ -12,5 +12,6 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
         List<ServiceCenter> GetAllServiceCenters();
 
         void AddServiceCenter(ServiceCenter serviceCenter);
+        bool ValidateServiceId(int serviceId);
     }
 }

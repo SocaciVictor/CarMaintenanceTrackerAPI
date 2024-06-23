@@ -30,5 +30,12 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
             _carMaintenanceTrackerDbContext.Cars.Add(car);
             _carMaintenanceTrackerDbContext.SaveChanges();
         }
+        public bool ValidCarId(int carId)
+        {
+            var result=_carMaintenanceTrackerDbContext.Cars
+                .Any(x => x.Id == carId);
+            return result;
+
+        }
     }
 }

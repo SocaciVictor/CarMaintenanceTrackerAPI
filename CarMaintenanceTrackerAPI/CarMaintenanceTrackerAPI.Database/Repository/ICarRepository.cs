@@ -10,6 +10,7 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
     public interface ICarRepository
     {
         List<Car> GetAllCars();
+        bool ValidCarId(int carId);
 
         void AddCar(Car car);
     }
