@@ -15,9 +15,12 @@ namespace CarMaintenanceTrackerAPI.Core.Services
         public IUserRepository _userRepository { get; set; }
 
         public UsersServices(
+            AuthServices authService,
            IUserRepository usersRepository)
         {
             _userRepository = usersRepository;
+            _authServices = authService;
+
         }
 
         public void Register(RegisterRequest registerData)
@@ -34,7 +37,9 @@ namespace CarMaintenanceTrackerAPI.Core.Services
             user.FirstName = registerData.FirstName;
             user.LastName = registerData.LastName;
             user.Email = registerData.Email;
+            user.Username = registerData.Username;
             user.Password = hashedPassword;
+            user.Type = registerData.Type;
             user.PasswordSalt = Convert.ToBase64String(salt);
 
             _userRepository.Add(user);

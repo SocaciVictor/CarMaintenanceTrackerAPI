@@ -36,5 +36,13 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
             _carMaintenanceTrackerDbContext.Users.Add(user);
             _carMaintenanceTrackerDbContext.SaveChanges();
         }
+
+        public bool ValidateUser(int userId)
+        {
+            var result = _carMaintenanceTrackerDbContext.Users
+                .Any(x => x.Id == userId);
+
+            return result;
+        }
     }
 }

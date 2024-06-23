@@ -13,5 +13,7 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
 
         User GetByEmail(string email);
         void Add(User user);
+
+        bool ValidateUser(int userId);
     }
 }

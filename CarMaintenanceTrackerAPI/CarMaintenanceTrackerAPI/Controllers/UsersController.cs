@@ -19,7 +19,7 @@ namespace CarMaintenanceTrackerAPI.Controllers
 
         [HttpPost("/register")]
         [AllowAnonymous]
-        public IActionResult Register(RegisterRequest payload)
+        public IActionResult Register([FromBody] RegisterRequest payload)
         {
             _usersServices.Register(payload);
             return Ok("Registration successful");
