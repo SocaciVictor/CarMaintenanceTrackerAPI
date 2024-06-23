@@ -19,6 +19,7 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
            
             var result = _carMaintenanceTrackerDbContext.MaintenanceRecords
                 .Include(m => m.Car)
+                .ThenInclude(m => m.User)
                 .Include(m => m.ServiceCenter)
                 .ToList();
             return result;
