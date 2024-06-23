@@ -53,9 +53,17 @@ namespace CarMaintenanceTracker.Database.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder
-              .UseSqlServer("Server=localhost;Database=dbCarMaintenanceTracker;User Id=sa2;Password=admin123;TrustServerCertificate=True")
-              .LogTo(Console.WriteLine);
+            if (!optionsBuilder.IsConfigured)
+            {
+                var useAlternate = false; // Poți schimba această condiție după cum ai nevoie
+                var connectionString = useAlternate
+                    ? "Server=localhost;Database=dbCarMaintenanceTracker;User Id=sa2;Password=admin123;TrustServerCertificate=True"
+                    : "Server=localhost;Database=dbCarMaintenanceTracker;User Id=sa1;Password=Admin123!;TrustServerCertificate=True";
+
+                optionsBuilder.UseSqlServer(connectionString);
+            }
         }
+
+
     }
 }
