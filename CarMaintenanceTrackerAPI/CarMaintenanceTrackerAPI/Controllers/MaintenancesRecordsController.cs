@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace CarMaintenanceTrackerAPI.Controllers
 {
     [Route("api/MaintenancesRecords")]
-    public class MaintenancesRecordsController : Controller
+    public class MaintenancesRecordsController : BaseController
     {
         private MaintenancesRecordsServices _maintenancesRecordsServices { get; set; }
 
@@ -31,6 +31,17 @@ namespace CarMaintenanceTrackerAPI.Controllers
         {
             _maintenancesRecordsServices.AddMaintenanceRecord(maintenanceRequest);
             return Ok("Maintenance added succesfully");
+        }
+
+        [HttpGet]
+        [Route("GetMaintenanceOfOwner")]
+        [Authorize(Roles = "0,1")]
+        public ActionResult<List<MaintenanceRecordDto>> GetMaintenanceOfOwner()
+        {
+            var authUserId = GetUserId();
+            var response = _maintenancesRecordsServices.GetMaintenancesRecordOfOwner(authUserId);
+
+            return response;
         }
         [HttpPut]
         [Route("{maintenanceId}/edit-maintenance")]

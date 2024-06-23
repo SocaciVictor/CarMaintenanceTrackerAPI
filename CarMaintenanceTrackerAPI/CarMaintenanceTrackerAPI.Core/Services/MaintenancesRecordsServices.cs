@@ -41,6 +41,23 @@ namespace CarMaintenanceTrackerAPI.Core.Services
 
             return maintenanceRecordDtos;
         }
+        public List<MaintenanceRecordDto> GetMaintenancesRecordOfOwner(int  ownerId)
+        {
+            var maitenances = _maintenanceRecordRepository.GetMaintenancesByOwnerId(ownerId);
+            if (maitenances == null)
+            {
+                throw new ResourceMissingException("Owner has no car.");
+
+            }
+            List<MaintenanceRecordDto> maintenanceRecordDtos = new List<MaintenanceRecordDto>();
+
+            foreach (MaintenanceRecord maintenanceRecord in maitenances)
+            {
+                maintenanceRecordDtos.Add(maintenanceRecord.ToMaintenanceRecordDto());
+            }
+        
+            return maintenanceRecordDtos;
+        }
         public void AddMaintenanceRecord(AddMaintenanceRecordRequest request)
         {
             var result = request.ToEntity();

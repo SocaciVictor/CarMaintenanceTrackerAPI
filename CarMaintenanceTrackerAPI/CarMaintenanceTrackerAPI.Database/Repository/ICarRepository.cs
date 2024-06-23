@@ -16,6 +16,8 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
 
         void EditCar(Car car);
 
+        
+
         Car GetCarById(int carId);
     }
 }

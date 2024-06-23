@@ -17,5 +17,6 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
         void DeleteMaintenance(MaintenanceRecord maintenance);
 
         MaintenanceRecord GetMaintenanceById(int Id);
+        List<MaintenanceRecord> GetMaintenancesByOwnerId(int Id);
     }
 }

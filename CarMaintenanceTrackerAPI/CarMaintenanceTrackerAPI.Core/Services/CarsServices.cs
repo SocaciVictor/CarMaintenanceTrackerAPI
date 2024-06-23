@@ -31,6 +31,15 @@ namespace CarMaintenanceTrackerAPI.Core.Services
 
             return carDtos;
         }
+        public CarDto GetCarDtoOfAOwner(int authOwnerId)
+        {
+            var car= _carRepository.GetCarById(authOwnerId);
+            if(car == null)
+            {
+                throw new ResourceMissingException("Owner has no car.");
+            }
+            return car.ToCarDto();
+        }
 
         public void AddCarToUser (AddCarRequest addCarRequest)
         {

@@ -49,6 +49,19 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
 
             
         }
+        public List<MaintenanceRecord> GetMaintenancesByOwnerId(int Id)
+        {
+            var result = _carMaintenanceTrackerDbContext.MaintenanceRecords
+                .Include(c => c.Car)
+                .ThenInclude(c=>c.User)
+                .Include(c => c.ServiceCenter)
+                .Where(c => c.Car.UserId == Id)
+                .ToList();
+            if (result == null)
+                throw new ResourceMissingException("Maintenance doesn't exist.");
+            return result;
+
+        }
         public void DeleteMaintenance(MaintenanceRecord maintenance)
         {
           

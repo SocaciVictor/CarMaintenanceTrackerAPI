@@ -34,7 +34,16 @@ namespace CarMaintenanceTrackerAPI.Controllers
 
             return Ok("Car added");
         }
+        [HttpGet]
+        [Route("GetCarOfOwner")]
+        [Authorize(Roles = "0,1")]
+        public ActionResult<CarDto> GetCarOfOwner()
+        {
+            var authUserId = GetUserId();
+            var response = _carsServices.GetCarDtoOfAOwner(authUserId);
 
+            return response;
+        }
         [HttpPut]
         [Route("{carId}/edit-car")]
         [Authorize(Roles = "0")]
