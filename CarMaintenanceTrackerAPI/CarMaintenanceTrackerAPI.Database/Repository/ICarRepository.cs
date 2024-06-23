@@ -13,5 +13,9 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
         bool ValidCarId(int carId);
 
         void AddCar(Car car);
+
+        void EditCar(Car car);
+
+        Car GetCarById(int carId);
     }
 }

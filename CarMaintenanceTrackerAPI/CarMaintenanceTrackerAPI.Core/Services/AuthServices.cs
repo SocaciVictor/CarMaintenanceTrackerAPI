@@ -25,27 +25,25 @@ namespace CarMaintenanceTrackerAPI.Core.Services
         public string GetToken(User user, string role)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
-
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_securityKey));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var roleClaim = new Claim("role", role);
             var idClaim = new Claim("userId", user.Id.ToString());
             var infoClaim = new Claim("username", user.Email);
+            var typeClaim = new Claim("userType", user.Type.ToString()); // Include user type
 
-            var tokenDescriptior = new SecurityTokenDescriptor
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Issuer = "Backend",
                 Audience = "Frontend",
-                Subject = new ClaimsIdentity(new[] { roleClaim, idClaim, infoClaim }),
+                Subject = new ClaimsIdentity(new[] { roleClaim, idClaim, infoClaim, typeClaim }),
                 Expires = DateTime.Now.AddMinutes(5),
                 SigningCredentials = credentials
             };
 
-            var token = jwtTokenHandler.CreateToken(tokenDescriptior);
-            var tokenString = jwtTokenHandler.WriteToken(token);
-
-            return tokenString;
+            var token = jwtTokenHandler.CreateToken(tokenDescriptor);
+            return jwtTokenHandler.WriteToken(token);
         }
 
         public bool ValidateToken(string tokenString)

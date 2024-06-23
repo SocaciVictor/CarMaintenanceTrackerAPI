@@ -1,6 +1,7 @@
 ﻿using CarMaintenanceTrackerAPI.Core.Dtos.Request;
 using CarMaintenanceTrackerAPI.Core.Dtos.Response;
 using CarMaintenanceTrackerAPI.Core.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarMaintenanceTrackerAPI.Controllers
@@ -25,10 +26,30 @@ namespace CarMaintenanceTrackerAPI.Controllers
         }
         [HttpPost]
         [Route("AddMaintenance")]
+        [Authorize(Roles = "0")]
         public IActionResult AddMaintenance(AddMaintenanceRecordRequest maintenanceRequest)
         {
             _maintenancesRecordsServices.AddMaintenanceRecord(maintenanceRequest);
             return Ok("Maintenance added succesfully");
+        }
+        [HttpPut]
+        [Route("{maintenanceId}/edit-maintenance")]
+        [Authorize(Roles = "0")]
+        public IActionResult EditMaintenance([FromRoute] int maintenanceId, [FromBody] EditMaintenanceRecordRequest payload)
+        {
+            _maintenancesRecordsServices.EditMaintenanceRecord(payload,maintenanceId);
+          
+
+            return Ok("Maintenance has been successfully edited");
+        }
+        [HttpDelete]
+        [Route("delete-maintenance")]
+        [Authorize(Roles ="0")]
+        public IActionResult DeleteMaintenance([FromQuery] int maintenanceId)
+        {
+            _maintenancesRecordsServices.DeleteMaintenanceRecord(maintenanceId);
+
+            return Ok("Task has been successfully deleted");
         }
     }
 }

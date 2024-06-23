@@ -27,11 +27,24 @@ namespace CarMaintenanceTrackerAPI.Controllers
 
         [HttpPost]
         [Route("AddCar")]
+        [Authorize(Roles = "0")]
         public IActionResult AddCar([FromBody] AddCarRequest addCarRequest)
         {
             _carsServices.AddCarToUser(addCarRequest);
 
             return Ok("Car added");
+        }
+
+        [HttpPut]
+        [Route("{carId}/edit-car")]
+        [Authorize(Roles = "0")]
+        public IActionResult EditMaintenance([FromRoute] int carId, [FromBody] EditCarRequest payload)
+        {
+            var authUserId = GetUserId();
+            _carsServices.EditCar(payload, carId,authUserId);
+
+
+            return Ok("Car has been successfully edited");
         }
 
     }

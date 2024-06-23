@@ -1,5 +1,6 @@
 ﻿using CarMaintenanceTracker.Database.Context;
 using CarMaintenanceTracker.Database.Entities;
+using CarMaintenanceTrackerAPI.Infrastructure.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,21 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
         {
             _carMaintenanceTrackerDbContext.Cars.Add(car);
             _carMaintenanceTrackerDbContext.SaveChanges();
+        }
+        public void EditCar(Car car)
+        {
+            if (_carMaintenanceTrackerDbContext.Entry(car).State == EntityState.Modified)
+                SaveChanges();
+        }
+        public Car GetCarById(int carId)
+        {
+           var result= _carMaintenanceTrackerDbContext.Cars.
+                Include(c => c.User).
+                Where(c=>c.Id == carId).
+                FirstOrDefault();
+            if (result == null)
+                throw new ResourceMissingException("Car doesn't exist");
+            return result;
         }
         public bool ValidCarId(int carId)
         {

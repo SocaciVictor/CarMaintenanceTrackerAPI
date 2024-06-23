@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CarMaintenanceTrackerAPI.Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,10 @@ namespace CarMaintenanceTrackerAPI.Infrastructure.Middlewares
             try
             {
                 await next(context);
+            }
+            catch(ResourceMissingException ex)
+            {
+                await RespondToExceptionAsync(context, HttpStatusCode.BadRequest, ex.Message, ex);
             }
             catch (Exception ex)
             {

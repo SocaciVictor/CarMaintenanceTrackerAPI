@@ -39,5 +39,18 @@ namespace CarMaintenanceTrackerAPI.Core.Mapping
             result.Date=addMaintenance.Date;
             return result;
         }
+        public static MaintenanceRecord ToEntity(this EditMaintenanceRecordRequest editMaintenance)
+        {
+            if (editMaintenance == null) return null;
+
+            var result = new MaintenanceRecord();
+
+            result.CarId = editMaintenance.CarId;
+            result.ServiceCenterId = editMaintenance.ServiceCenterId;
+            result.Cost = editMaintenance.Cost;
+            result.Description = editMaintenance.Description;
+            result.Date = editMaintenance.Date;
+            return result;
+        }
     }
 }

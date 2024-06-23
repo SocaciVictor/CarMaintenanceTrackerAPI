@@ -55,7 +55,7 @@ namespace CarMaintenanceTracker.Database.Context
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var useAlternate = true; // Poți schimba această condiție după cum ai nevoie
+                var useAlternate = false; // Poți schimba această condiție după cum ai nevoie
                 var connectionString = useAlternate
                     ? "Server=localhost;Database=dbCarMaintenanceTracker;User Id=sa2;Password=admin123;TrustServerCertificate=True"
                     : "Server=localhost;Database=dbCarMaintenanceTracker;User Id=sa1;Password=Admin123!;TrustServerCertificate=True";

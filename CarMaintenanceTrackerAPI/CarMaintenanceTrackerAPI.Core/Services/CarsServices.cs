@@ -3,6 +3,7 @@ using CarMaintenanceTrackerAPI.Core.Dtos.Response;
 using CarMaintenanceTrackerAPI.Database.Repository;
 using CarMaintenanceTrackerAPI.Core.Mapping;
 using CarMaintenanceTrackerAPI.Core.Dtos.Request;
+using CarMaintenanceTrackerAPI.Infrastructure.Exceptions;
 
 namespace CarMaintenanceTrackerAPI.Core.Services
 {
@@ -38,6 +39,18 @@ namespace CarMaintenanceTrackerAPI.Core.Services
             if(ValidateUser(car.UserId))
                 _carRepository.AddCar(car);
         }
+        public void EditCar(EditCarRequest editCarRequest,int carId,int authUserId)
+        {
+            var car=_carRepository.GetCarById(carId);
+            if(car.UserId!=authUserId)
+                throw new ForbiddenException("Forbidden");
+
+            if (ValidateUser(editCarRequest.UserId))
+            {
+                SwitchingCarDetails(editCarRequest,car);
+                _carRepository.EditCar(car);
+            }
+        }
 
 
         private bool ValidateUser(int userId)
@@ -46,9 +59,17 @@ namespace CarMaintenanceTrackerAPI.Core.Services
 
             if (user == false)
             {
-                throw new Exception("User not found");
+                throw new ResourceMissingException("User not found");
             }
             return true;
         }   
+        private void SwitchingCarDetails(EditCarRequest editCarRequest,Car car)
+        {
+            car.Make=editCarRequest.Make;
+            car.UserId=editCarRequest.UserId;
+            car.LicensePlate=editCarRequest.LicensePlate;
+            car.Model=editCarRequest.Model;
+            car.Year=Int32.Parse(editCarRequest.Year);
+        }
     }
 }

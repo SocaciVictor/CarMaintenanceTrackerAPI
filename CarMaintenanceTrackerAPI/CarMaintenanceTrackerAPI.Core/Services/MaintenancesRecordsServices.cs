@@ -1,8 +1,10 @@
 ﻿using CarMaintenanceTracker.Database.Entities;
+using CarMaintenanceTracker.Database.Enums;
 using CarMaintenanceTrackerAPI.Core.Dtos.Request;
 using CarMaintenanceTrackerAPI.Core.Dtos.Response;
 using CarMaintenanceTrackerAPI.Core.Mapping;
 using CarMaintenanceTrackerAPI.Database.Repository;
+using CarMaintenanceTrackerAPI.Infrastructure.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,6 +51,31 @@ namespace CarMaintenanceTrackerAPI.Core.Services
             }
 
         }
+        public void EditMaintenanceRecord(EditMaintenanceRecordRequest request,int requestId)
+        {
+            var result = _maintenanceRecordRepository.GetMaintenanceById(requestId);
+            if(ValidCarId(request.CarId)&& ValidServiceId(request.ServiceCenterId))
+            {
+                editTask(request, result);
+                _maintenanceRecordRepository.EditMaintenance(result);
+
+            }
+        }
+        public void DeleteMaintenanceRecord(int maintenanceId)
+        {
+          
+            var maintenance = _maintenanceRecordRepository.GetMaintenanceById(maintenanceId);
+
+           
+            if (maintenance == null)
+            {
+                throw new ResourceMissingException($"Maintenance record with ID {maintenanceId} was not found.");
+            }
+
+            _maintenanceRecordRepository.DeleteMaintenance(maintenance);
+        }
+
+
 
         private bool ValidCarId(int Id)
         {
@@ -56,7 +83,7 @@ namespace CarMaintenanceTrackerAPI.Core.Services
 
             if (car == false)
             {
-                throw new Exception("Car not found");
+                throw new ResourceMissingException("Car not found");
             }
             return true;
         }
@@ -66,10 +93,20 @@ namespace CarMaintenanceTrackerAPI.Core.Services
 
             if (service == false)
             {
-                throw new Exception("Service not found");
+                throw new ResourceMissingException("Service not found");
             }
             return true;
         }
+        private void editTask(EditMaintenanceRecordRequest request,MaintenanceRecord maintenanceRecord)
+        {
+            maintenanceRecord.CarId=request.CarId;
+            maintenanceRecord.ServiceCenterId=request.ServiceCenterId;
+            maintenanceRecord.Cost=request.Cost;
+            maintenanceRecord.Date=request.Date;
+            maintenanceRecord.Description=request.Description;
+            maintenanceRecord.MaintenanceType = (MaintenanceType)request.MaintenanceType;
+        }
+
     }
        
 }
