@@ -1,5 +1,7 @@
 using CarMaintenanceTracker;
+using CarMaintenanceTracker.Database.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -15,6 +17,8 @@ internal class Program
         builder.Services.AddRepositories();
         builder.Services.AddSwagger();
         builder.Services.AddServices();
+
+        
 
         // Authentication % Authorization
         builder.Services.AddAuthentication(options =>
