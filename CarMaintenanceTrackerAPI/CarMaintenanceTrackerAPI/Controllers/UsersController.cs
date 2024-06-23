@@ -21,7 +21,12 @@ namespace CarMaintenanceTrackerAPI.Controllers
         [AllowAnonymous]
         public IActionResult Register([FromBody] RegisterRequest payload)
         {
-            _usersServices.Register(payload);
+            if (!ModelState.IsValid)
+            {
+                throw new Exception("Invalid payload");
+            }
+                _usersServices.Register(payload);
+            
             return Ok("Registration successful");
         }
 
