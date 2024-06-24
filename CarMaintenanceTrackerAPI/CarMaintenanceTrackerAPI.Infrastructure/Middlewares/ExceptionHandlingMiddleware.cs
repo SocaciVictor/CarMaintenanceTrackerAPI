@@ -27,6 +27,10 @@ namespace CarMaintenanceTrackerAPI.Infrastructure.Middlewares
             {
                 await next(context);
             }
+            catch(ForbiddenException ex)
+            {
+                await RespondToExceptionAsync(context, HttpStatusCode.Forbidden, ex.Message, ex);
+            }
             catch(ResourceMissingException ex)
             {
                 await RespondToExceptionAsync(context, HttpStatusCode.BadRequest, ex.Message, ex);
