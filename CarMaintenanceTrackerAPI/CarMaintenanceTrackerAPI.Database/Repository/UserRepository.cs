@@ -44,5 +44,14 @@ namespace CarMaintenanceTrackerAPI.Database.Repository
 
             return result;
         }
+
+        public bool CanAddCar(int userId)
+        {
+            var result = _carMaintenanceTrackerDbContext.Users
+                .Include(u => u.Car)
+                .Any(x => x.Id == userId && x.Car == null);
+
+            return result;
+        }
     }
 }

@@ -66,9 +66,15 @@ namespace CarMaintenanceTrackerAPI.Core.Services
         {
             var user = _userRepository.ValidateUser(userId);
 
+            var canAddCar = _userRepository.CanAddCar(userId);
+
             if (user == false)
             {
                 throw new ResourceMissingException("User not found");
+            }
+            if (canAddCar == false)
+            {
+                throw new ConflictException("User already has a car");
             }
             return true;
         }   

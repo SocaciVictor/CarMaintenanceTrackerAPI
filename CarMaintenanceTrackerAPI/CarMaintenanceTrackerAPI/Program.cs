@@ -1,5 +1,6 @@
 using CarMaintenanceTracker;
 using CarMaintenanceTracker.Database.Context;
+using CarMaintenanceTrackerAPI.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -48,6 +49,8 @@ internal class Program
         builder.Services.AddAuthorization();
 
         var app = builder.Build();
+
+        app.UseMiddleware<ExceptionHandlingMiddleware>();
 
         if (app.Environment.IsDevelopment())
         {
