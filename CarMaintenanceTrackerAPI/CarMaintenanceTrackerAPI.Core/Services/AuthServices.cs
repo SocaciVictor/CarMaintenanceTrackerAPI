@@ -31,7 +31,7 @@ namespace CarMaintenanceTrackerAPI.Core.Services
             var roleClaim = new Claim("role", role);
             var idClaim = new Claim("userId", user.Id.ToString());
             var infoClaim = new Claim("username", user.Email);
-            var typeClaim = new Claim("userType", user.Type.ToString()); // Include user type
+            var typeClaim = new Claim("userType", user.Type.ToString());
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

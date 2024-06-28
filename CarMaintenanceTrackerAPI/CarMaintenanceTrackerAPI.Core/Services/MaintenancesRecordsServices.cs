@@ -76,7 +76,13 @@ namespace CarMaintenanceTrackerAPI.Core.Services
         public void EditMaintenanceRecord(EditMaintenanceRecordRequest request,int requestId)
         {
             var result = _maintenanceRecordRepository.GetMaintenanceById(requestId);
-            if(ValidCarId(request.CarId)&& ValidServiceId(request.ServiceCenterId))
+
+            if (result == null)
+            {
+                throw new ResourceMissingException($"Maintenance record with ID {requestId} was not found.");
+            }
+
+            if (ValidCarId(request.CarId)&& ValidServiceId(request.ServiceCenterId))
             {
                 if (HasChangedCarId(request.CarId, result))
                 {
